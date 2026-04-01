@@ -1,5 +1,6 @@
 import turtle
 import random
+import time
 
 
 drawing_board= turtle.Screen()
@@ -24,29 +25,41 @@ score_turtle.hideturtle()
 #score_turtle.teleport(0, y/2*0.8) # küçük ekran için kullanılabilir
 score_turtle.teleport(0, 480)
 
-#time=0
+time_sec=0
 score=0
 gameover=False
+game_pl=False
 
-'''def time_turtle():
-    global time
+def time_turtle():
+    global time_sec
+    global game_pl
     time_turtle = turtle.Turtle()
     time_turtle.color("dark blue")
     time_turtle.hideturtle()
-    time= int(input(time_turtle.write("Enter how many seconds you want to play: ", align="center", font=("Arial", 24, "normal"))))
-    #timer_turtle.write(f"Enter how many seconds you want to play: {time}", align="center", font=("Arial", 24, "normal"))
-    timer_turtle.clear()'''
+    time_turtle.teleport(0,30)
+    '''time_turtle.write("Enter how many seconds you want to play & press enter: ",
+                      align="center", font=("Arial", 24, "normal"))'''
+    time_sec=int(drawing_board.numinput("SET TIME", "Enter how many seconds you want to play:"))
+    #time_sec= int(input("Enter how many seconds you want to play: "))
+    if time_sec > 0:
+        time_turtle.clear()
+        time_turtle.write(f"PLAY FOR {time_sec} SECONDS. HAVE FUN!",
+                      align="center", font=("Arial", 24, "normal"))
+        time.sleep(2)
+        time_turtle.clear()
+        game_pl = True
+
 
 def my_function(x,y):
     global score
     score += 1
 
-def countdown(time):
+def countdown(time_sec):
     global gameover
     timer_turtle.clear()
-    timer_turtle.write(f"Time: {time}", align="center", font=("Arial", 24, "normal"))
-    if time > 0:
-        drawing_board.ontimer(lambda: countdown(time-1),1000)
+    timer_turtle.write(f"Time: {time_sec}", align="center", font=("Arial", 24, "normal"))
+    if time_sec > 0:
+        drawing_board.ontimer(lambda: countdown(time_sec-1),1000)
     else:
         timer_turtle.clear()
         timer_turtle.write("Game Over!", align="center", font=("Arial", 24, "normal"))
@@ -70,15 +83,15 @@ def move_turtle():
         score_turtle.write(f"Score: {score}", align="center", font=("Arial", 24, "normal"))
         #turtle_ins.hideturtle()
 
-'''time_turtle()
+time_turtle()
+print(time_sec)
+print(game_pl)
 
-if time > 0:
-    countdown(time)
-    move_turtle()'''
+if game_pl:
+    countdown(time_sec)
+    move_turtle()
 
-countdown(10)
-move_turtle()
-
-
+#countdown(10)
+#move_turtle()
 
 turtle.mainloop()
