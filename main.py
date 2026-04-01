@@ -2,7 +2,6 @@ import turtle
 import random
 import time
 
-
 drawing_board= turtle.Screen()
 drawing_board.bgcolor("light blue")
 drawing_board.title("Catch the Turtle")
@@ -37,6 +36,7 @@ def time_turtle():
     time_turtle.color("dark blue")
     time_turtle.hideturtle()
     time_turtle.teleport(0,30)
+    # Using .numinput function no need for the lines 41, 42 and 44 anymore but that's another way of getting and showing the time input
     '''time_turtle.write("Enter how many seconds you want to play & press enter: ",
                       align="center", font=("Arial", 24, "normal"))'''
     time_sec=int(drawing_board.numinput("SET TIME", "Enter how many seconds you want to play:"))
@@ -48,7 +48,6 @@ def time_turtle():
         time.sleep(2)
         time_turtle.clear()
         game_pl = True
-
 
 def my_function(x,y):
     global score
@@ -66,7 +65,6 @@ def countdown(time_sec):
         gameover=True
         turtle_ins.hideturtle()
 
-
 def move_turtle():
     score_turtle.clear()
     score_turtle.write(f"Score: {score}", align="center", font=("Arial", 24, "normal"))
@@ -74,24 +72,15 @@ def move_turtle():
     y = random.randint(-540, +540)
     turtle_ins.teleport(x, y)
     turtle_ins.onclick(my_function)
-
-    # Set timer for 1000ms (1 second) and recall countdown
     if not gameover:
-        #turtle_ins.clear()
-        drawing_board.ontimer(move_turtle,1250)
+        drawing_board.ontimer(move_turtle,1250) # One may increase of decrease the speed of the turtle by tuning the time in miliseconds
     else:
         score_turtle.write(f"Score: {score}", align="center", font=("Arial", 24, "normal"))
-        #turtle_ins.hideturtle()
 
 time_turtle()
-print(time_sec)
-print(game_pl)
 
 if game_pl:
     countdown(time_sec)
     move_turtle()
-
-#countdown(10)
-#move_turtle()
 
 turtle.mainloop()
